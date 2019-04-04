@@ -123,7 +123,6 @@ class LinkedList {
   }
 }
 
-
 let SLL = new LinkedList();
 SLL.insertLast('Apollo');
 SLL.insertLast('Boomer');
@@ -153,7 +152,7 @@ function size(ll) {
 // console.log(size(SLL));
 
 function isEmpty(ll) {
-  return (ll.head === null);
+  return ll.head === null;
 }
 // console.log(isEmpty(SLL));
 
@@ -184,10 +183,9 @@ function findLast(ll) {
 }
 // console.log(findLast(SLL));
 
-
 // 4. Mystery program
 
-// loops through a list and checks current node's value for duplicates to next node. If they are the same, it will skip past it and continue through the list. 
+// loops through a list and checks current node's value for duplicates to next node. If they are the same, it will skip past it and continue through the list.
 // time complexity: Polynomial time O(n^2)
 function WhatDoesThisProgramDo(lst) {
   // set pointer to the current node
@@ -210,7 +208,6 @@ function WhatDoesThisProgramDo(lst) {
   }
 }
 
-
 // 5. Reverse a list
 
 function reverseList(ll) {
@@ -222,6 +219,7 @@ function reverseList(ll) {
   while (currNode.next !== null) {
     let currTemp = currNode;
     let prevTemp = prevNode;
+
     prevNode = currNode;
     currNode = currNode.next;
     currTemp.next = prevTemp;
@@ -245,7 +243,6 @@ function thirdFromEnd(ll) {
 }
 
 // console.log(thirdFromEnd(SLL));
-
 
 // 7. Middle of a list
 
@@ -273,7 +270,7 @@ console.log(middleOfList(SLL));
 
 function cycleList(ll) {
   let currNode = ll.head;
-  // iterate through the list to check if currNode has next value pointing to an earlier node?  
+  // iterate through the list to check if currNode has next value pointing to an earlier node?
 }
 
 const main = () => {

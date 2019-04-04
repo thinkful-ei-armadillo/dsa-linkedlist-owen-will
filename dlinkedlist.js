@@ -8,7 +8,6 @@ class _Node {
   }
 }
 
-
 class DoublyLinkedList {
   constructor() {
     this.head = null;
@@ -16,6 +15,9 @@ class DoublyLinkedList {
   }
   insertFirst(item) {
     this.head = new _Node(item, this.head, null);
+    if (this.head.next === null) {
+      this.tail = this.head;
+    }
   }
   insertLast(item) {
     if (this.head === null) {
@@ -25,7 +27,7 @@ class DoublyLinkedList {
       while (tempNode.next !== null) {
         tempNode = tempNode.next;
       }
-      tempNode.next = new _Node(item, null);
+      tempNode.next = new _Node(item, null, tempNode);
     }
   }
   find(item) {
@@ -48,11 +50,15 @@ class DoublyLinkedList {
     }
     if (this.head.value === item) {
       this.head = this.head.next;
+      if (this.head === null) {
+        this.tail === null;
+      }
       return;
     }
+
     let currNode = this.head;
-    let previousNode = this.head;
-  
+    let previousNode = null;
+
     while (currNode !== null && currNode.value !== item) {
       previousNode = currNode;
       currNode = currNode.next;
@@ -62,16 +68,19 @@ class DoublyLinkedList {
       return;
     }
     previousNode.next = currNode.next;
+    if (currNode.next === null) {
+      this.tail === previousNode;
+    }
     return console.log('removed');
   }
   insertBefore(newNode, value) {
     let currNode = this.head;
-    let previousNode = this.head;
-  
+    let previousNode = null;
+
     if (!this.head) {
       return null;
     }
-  
+
     while (currNode.value !== value) {
       if (currNode.next === null) {
         return new Error('Not found');
@@ -80,33 +89,34 @@ class DoublyLinkedList {
         currNode = currNode.next;
       }
     }
-    previousNode.next = new _Node(newNode, currNode);
+    previousNode.next = new _Node(newNode, currNode, previousNode);
     return console.log('Successfully added');
   }
   insertAfter(newNode, value) {
     let currNode = this.head;
-    let previousNode = this.head;
-  
+
     if (!this.head) {
       return null;
     }
-  
+
     while (currNode.value !== value) {
       if (currNode.next === null) {
         return new Error('Not found');
       } else {
-        previousNode = currNode;
         currNode = currNode.next;
       }
     }
-    currNode.next = new _Node(newNode, currNode.next);
+    currNode.next = new _Node(newNode, currNode.next, currNode);
+    if (currNode.next === null) {
+      this.tail = currNode;
+    }
     console.log(currNode.next);
     return console.log('Successfully added');
   }
   insertAt(newNode, position) {
     let currNode = this.head;
-    let previousNode = this.head;
-  
+    let previousNode = null;
+
     if (!this.head) {
       return null;
     }
@@ -120,9 +130,41 @@ class DoublyLinkedList {
       }
       counter++;
     }
-  
-    previousNode.next = new _Node(newNode, currNode);
+    previousNode.next = new _Node(newNode, currNode, previousNode);
+
     console.log(previousNode.next);
     return console.log(`Successfully added at ${position}`);
   }
+}
+
+const mainDLL = () => {
+  let DLL = new DoublyLinkedList();
+  DLL.insertLast('Aquaria');
+  DLL.insertLast('Caprica');
+  DLL.insertLast('Gemenon');
+  DLL.insertLast('Picon');
+  DLL.insertLast('Sagittaron');
+
+  DLL.insertLast('Tauron');
+
+  DLL.remove('Picon');
+};
+
+function reverseList(dll) {
+  // input: 1 -> 2 -> 3
+  // output: 1 <- 2 <- 3
+  let currNode = dll.tail;
+  let nodeAfter = null;
+  let nodeBefore = dll.tail.prev;
+  // [0, 1, 2, 4, 5, 7]
+
+  while (currNode.prev !== null) {
+    // get original link relations of node
+    let nodeAfterTemp = nodeAfter;
+    let nodeBeforeTemp = nodeBefore;
+    let currNodeTemp = currNode;
+  }
+  currNode.next = prevNode;
+  ll.head = currNode;
+  return ll;
 }
